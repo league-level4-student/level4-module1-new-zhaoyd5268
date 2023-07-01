@@ -34,8 +34,6 @@ class GottaCatchemAll {
     public void testNullPointerException() {
         try {
 
-            rob = new Robot();
-
             rob.setSpeed(100);
             rob.penDown();
 
@@ -64,7 +62,7 @@ class GottaCatchemAll {
         try {
 
             for (int i = 0; i < intArray.length; i++) {
-                System.out.println(intArray[i]);
+                System.out.println(intArray[i+1]);
             }
         } catch (ArrayIndexOutOfBoundsException e) {
             arrayIndexOOBExceptionCaught = true;
@@ -82,7 +80,7 @@ class GottaCatchemAll {
     public void testNumberFormatException() {
 
         try {
-            int answer = Integer.parseInt("42");
+            int answer = Integer.parseInt(null);
 
             System.out.println(
                     "The answer to life, the universe and everything is... "
@@ -109,7 +107,7 @@ class GottaCatchemAll {
             Random rand = new Random();
             int dividend = rand.nextInt(9900) + 100;
             int divisor = rand.nextInt(5400) + 100;
-            int quotient = dividend / divisor;
+            int quotient = dividend / divisor / 0;
 
             System.out.println("The result of " + dividend + " divided by "
                     + divisor + " is " + quotient);

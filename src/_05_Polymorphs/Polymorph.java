@@ -9,7 +9,7 @@ public abstract class Polymorph {
 	private int width;
 	private int height;
 
-	public Polymorph(int x, int y, int width, int height) {
+	public Polymorph(int x, int y, int width, int height, int mouseX, int mouseY) {
 		this.x = x;
 		this.y = y;
 		this.width = width;

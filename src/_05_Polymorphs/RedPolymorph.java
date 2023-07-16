@@ -8,9 +8,9 @@ public class RedPolymorph extends Polymorph {
 	int y;
 	int width;
 	int height;
-
-	public RedPolymorph(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	
+	public RedPolymorph(int x, int y, int width, int height, int mouseX, int mouseY) {
+		super(x, y, width, height, mouseX, mouseY);
 		this.x = x;
 		this.y = y;
 		this.width = width;

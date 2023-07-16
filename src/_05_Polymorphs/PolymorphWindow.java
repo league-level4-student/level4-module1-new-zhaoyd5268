@@ -5,6 +5,9 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -54,49 +57,65 @@ import javax.swing.Timer;
 
 public class PolymorphWindow extends JPanel implements ActionListener {
 
-    public static final int WIDTH = 900;
-    public static final int HEIGHT = 600;
+	public static final int WIDTH = 900;
+	public static final int HEIGHT = 600;
 
-    private JFrame window;
-    private Timer timer;
+	private JFrame window;
+	private Timer timer;
 
-    Polymorph bluePoly;
-    Polymorph redPoly;
-    Polymorph movingPoly;
-    public static void main(String[] args) {
-        new PolymorphWindow().buildWindow();
-    }
+	Polymorph bluePoly;
+	Polymorph redPoly;
+	Polymorph movingPoly;
+	Polymorph followingPoly;
 
-    public void buildWindow() {
-        window = new JFrame("IT'S MORPHIN' TIME!");
-        window.add(this);
-        window.getContentPane().setPreferredSize(new Dimension(500, 500));
-        window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        window.pack();
-        window.setVisible(true);
-        bluePoly = new BluePolymorph(50, 50, 50, 50);
-        redPoly = new RedPolymorph(200, 200, 100, 25);
-        movingPoly = new MovingMorph(0,300,10,10);
-        timer = new Timer(1000 / 30, this);
-        timer.start();
-    }
+	int mouseX;
+	int mouseY;
 
-    public void paintComponent(Graphics g) {
-        // draw background
-        g.setColor(Color.LIGHT_GRAY);
-        g.fillRect(0, 0, 500, 500);
+	ArrayList<Polymorph> polys = new ArrayList<Polymorph>();
 
-        // draw polymorph
-        bluePoly.draw(g);
-        movingPoly.draw(g);
-        redPoly.draw(g);
-    }
+	public static void main(String[] args) {
+		new PolymorphWindow().buildWindow();
+	}
 
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        repaint();
-        bluePoly.update();
-        movingPoly.update();
-        repaint();
-    }
+	public void buildWindow() {
+		window = new JFrame("IT'S MORPHIN' TIME!");
+		window.add(this);
+		window.getContentPane().setPreferredSize(new Dimension(500, 500));
+		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		window.pack();
+		window.setVisible(true);
+		movingPoly = new MovingMorph(300, 300, 50, 50, mouseX, mouseY);
+		redPoly = new RedPolymorph(350, 50, 40, 50, mouseX, mouseY);
+		bluePoly = new BluePolymorph(500, 400, 50, 200, mouseX, mouseY);
+		followingPoly = new FollowingMorph(500, 500, 25, 25, mouseX, mouseY);
+		repaint();
+		timer = new Timer(1000 / 30, this);
+		timer.start();
+	}
+
+	public void paintComponent(Graphics g) {
+		// draw background
+		g.setColor(Color.LIGHT_GRAY);
+		g.fillRect(0, 0, 500, 500);
+
+		// draw polymorph
+		polys.add(bluePoly);
+		polys.add(redPoly);
+		polys.add(movingPoly);
+		polys.add(followingPoly);
+		for (int i = 0; i < 4; i++) {
+			polys.get(i).draw(g);
+			polys.get(i).update();
+		}
+		polys.get(3).draw(g);
+		followingPoly.update();
+		repaint();
+	}
+
+	@Override
+	public void actionPerformed(ActionEvent e) {
+		
+	}
+
+
 }

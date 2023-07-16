@@ -9,8 +9,8 @@ public class BluePolymorph extends Polymorph {
 	int width;
 	int height;
 
-	public BluePolymorph(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	public BluePolymorph(int x, int y, int width, int height, int mouseX, int mouseY) {
+		super(x, y, width, height, mouseX, mouseY);
 		this.x = x;
 		this.y = y;
 		this.width = width;

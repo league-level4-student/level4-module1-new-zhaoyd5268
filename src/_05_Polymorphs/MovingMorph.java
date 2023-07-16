@@ -2,15 +2,16 @@ package _05_Polymorphs;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.util.Random;
 
 public class MovingMorph extends Polymorph{
 	int x;
 	int y;
 	int width;
 	int height;
-	
-	public MovingMorph(int x, int y, int width, int height) {
-		super(x, y, width, height);
+	Random r = new Random();
+	public MovingMorph(int x, int y, int width, int height, int mouseX, int mouseY) {
+		super(x, y, width, height, mouseX, mouseY);
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -19,14 +20,27 @@ public class MovingMorph extends Polymorph{
 
 	@Override
 	public void update() {
-		if (x==PolymorphWindow.WIDTH) {
-			x-=PolymorphWindow.WIDTH;
+		if (x>=600) {
+			x=200;
 		}
-		if (y==PolymorphWindow.HEIGHT) {
-			y-=PolymorphWindow.HEIGHT;
+		if (x<=0) {
+			x=200;
 		}
-			x+=10;
-			y+=10;
+		if (y>=600) {
+			y=200;
+		} 
+		if (y<=0) {
+			y=200;
+		}
+			int w = r.nextInt(2);
+			if (w==0) {
+				x+=r.nextInt(20);
+				y+=r.nextInt(20);
+			} else {
+				x-=r.nextInt(20);
+				y-=r.nextInt(20);
+			}
+			
 	}
 
 	@Override

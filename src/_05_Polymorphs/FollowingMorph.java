@@ -26,15 +26,14 @@ public class FollowingMorph extends Polymorph implements MouseMotionListener {
 
 	@Override
 	public void update() {
-		x = mouseX;
-		y = mouseY;
-		
+		mouseX = x;
+		mouseY = y;
 	}
 
 	@Override
 	public void draw(Graphics g) {
 		g.setColor(Color.PINK);
-		g.fillRect(x, x, width, height);
+		g.fillRect(x-10, y-30, width, height);
 
 	}
 
@@ -46,10 +45,8 @@ public class FollowingMorph extends Polymorph implements MouseMotionListener {
 
 	@Override
 	public void mouseMoved(MouseEvent e) {
-		System.out.println("beancheese");
-		System.out.println(e.getY());
-		mouseX = e.getX();
-		mouseY = e.getY();
+		x=e.getX();
+		y=e.getY();
 		update();
 		}
 

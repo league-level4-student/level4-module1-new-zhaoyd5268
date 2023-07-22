@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
@@ -67,7 +68,7 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 	Polymorph redPoly;
 	Polymorph movingPoly;
 	Polymorph followingPoly;
-
+	Polymorph clickerPoly;
 	int mouseX;
 	int mouseY;
 
@@ -88,6 +89,9 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 		redPoly = new RedPolymorph(350, 50, 40, 50, mouseX, mouseY);
 		bluePoly = new BluePolymorph(500, 400, 50, 200, mouseX, mouseY);
 		followingPoly = new FollowingMorph(500, 500, 25, 25, mouseX, mouseY);
+		clickerPoly = new ClickerMorph(50,50,25,25,mouseX,mouseY);
+		window.addMouseMotionListener((MouseMotionListener) followingPoly);
+		window.addMouseListener((MouseListener) clickerPoly);
 		repaint();
 		timer = new Timer(1000 / 30, this);
 		timer.start();
@@ -103,7 +107,8 @@ public class PolymorphWindow extends JPanel implements ActionListener {
 		polys.add(redPoly);
 		polys.add(movingPoly);
 		polys.add(followingPoly);
-		for (int i = 0; i < 4; i++) {
+		polys.add(clickerPoly);
+		for (int i = 0; i < 5; i++) {
 			polys.get(i).draw(g);
 			polys.get(i).update();
 		}
